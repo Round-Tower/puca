@@ -54,3 +54,14 @@ def test_empty_findings():
     h = render_html([], engagement="e", target="t", generated="g")
     assert h.startswith("<!doctype html>")
     assert "findings" in h            # empty tally reads "0 findings"
+
+
+def test_murphysig_footer():
+    h = render_html([Finding("x", "low", "A05", "e", "r", confidence=0.5)],
+                    engagement="e", target="t", generated="g",
+                    signature="kevin + claude-opus-4-8, 2026-09-10, confidence 0.85 — test")
+    assert "MurphySig" in h                       # visible provenance
+    assert "murphysig.dev" in h
+    assert "<!-- Signed:" in h                     # machine-readable
+    # no signature -> no MurphySig block
+    assert "MurphySig" not in render_html([], engagement="e", target="t", generated="g")
