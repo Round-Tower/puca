@@ -1,12 +1,26 @@
-# Never commit real engagement data or findings to a public repo
+# --- Engagement data & findings: NEVER commit to a public repo ---
 scope.yaml
 scope.*.yaml
 !scope.example.yaml
 reports/
 *.report.md
+*.report.html
 out/
 
-# Python
+# --- Secrets & credentials (self-contained; do not rely on a global ignore) ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.keystore
+id_rsa*
+credentials.json
+*.token
+secrets.*
+
+# --- Python ---
 __pycache__/
 *.pyc
 .pytest_cache/
@@ -14,3 +28,11 @@ __pycache__/
 venv/
 *.egg-info/
 .coverage
+.mypy_cache/
+.ruff_cache/
+
+# --- OS / editor ---
+.DS_Store
+*.swp
+.idea/
+.vscode/
