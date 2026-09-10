@@ -12,6 +12,9 @@ Review: Kev + claude-opus-4-8, 2026-09-10 — full redesign for accessibility +
   readability (was info-dense but poor for both). Severity now triple-encoded;
   semantic landmarks + skip link + scoped headers; readable type scale; the
   design is built into the renderer so every report inherits it. Confidence now 0.8.
+Review: Kev + claude-opus-4-8, 2026-09-10 — dropped the redundant ordinal
+  numbering (index + finding headings) to cut a third competing marker per line;
+  the coloured dot + severity word carry priority. Cognitive-load cut per Kev. Confidence now 0.8.
 """
 from __future__ import annotations
 
@@ -60,7 +63,7 @@ def render_html(findings, *, engagement: str, target: str, generated: str,
         f'<article id="{_slug(i)}" class="finding" style="--c:{_SEV[f.severity]}" '
         f'aria-labelledby="{_slug(i)}-h">'
         f'<h3 id="{_slug(i)}-h"><span class="pill" style="--c:{_SEV[f.severity]}">{f.severity}</span>'
-        f'<span class="num">{i}.</span> {_esc(f.title)}</h3>'
+        f' {_esc(f.title)}</h3>'
         f'<p class="ref"><b>OWASP</b> {_esc(f.owasp_id)} &mdash; {_esc(owasp_name(f.owasp_id))}'
         f' &nbsp;<b>Confidence</b> {f.confidence:.2f}'
         f'{(" &nbsp;<b>Target</b> " + _esc(f.target)) if f.target else ""}</p>'
@@ -113,7 +116,7 @@ def render_html(findings, *, engagement: str, target: str, generated: str,
   .tickets { color:var(--muted); }
   h2 { font-size:1.4rem; margin:2.4rem 0 .8rem; font-weight:700; }
   nav.index h2 { margin-bottom:.4rem; }
-  nav.index ol { padding-left:1.4rem; margin:0; }
+  nav.index ul { list-style:none; padding-left:0; margin:0; }
   nav.index li { margin:.5em 0; }
   nav.index a { color:var(--fg); text-decoration:none; border-bottom:1px solid transparent; }
   nav.index a:hover { border-bottom-color:var(--accent); }
@@ -124,7 +127,6 @@ def render_html(findings, *, engagement: str, target: str, generated: str,
     padding:1.3rem 0 1.3rem 1.2rem; margin:1.4rem 0; }
   .finding h3 { font-size:1.2rem; line-height:1.3; margin:0 0 .5rem; font-weight:700;
     display:flex; flex-wrap:wrap; align-items:baseline; gap:.5em; }
-  .finding .num { color:var(--muted); font-weight:600; }
   .pill { color:#fff; background:var(--c); padding:.12em .6em; border-radius:5px;
     font-size:.72rem; font-weight:700; text-transform:capitalize; letter-spacing:.02em; }
   .finding h4 { font-size:.82rem; color:var(--muted); margin:1.1em 0 .25em; font-weight:700; }
@@ -152,7 +154,7 @@ def render_html(findings, *, engagement: str, target: str, generated: str,
 </header>
 <ul class="tally" aria-label="Findings by severity">$tally</ul>
 $tickets
-<nav class="index" aria-label="Findings index"><h2>Findings</h2><ol>$toc</ol></nav>
+<nav class="index" aria-label="Findings index"><h2>Findings</h2><ul>$toc</ul></nav>
 <main id="main">
 $arts
 $positives
