@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=77.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "puca"
+version = "0.1.0"
+description = "Puca — a white-hat, OWASP-mapped security testing kit for web, API, and agentic/MCP systems."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{ name = "Kevin Murphy", email = "kevin@round-tower.ie" }]
+dependencies = [
+    "requests>=2.31",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+puca = "puca.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["puca*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

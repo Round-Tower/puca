@@ -1,0 +1,15 @@
+# Disposable Kali box. Run:  docker compose -f docker/compose.yaml run --rm puca
+# On macOS, Docker runs in a Linux VM: host networking / raw sockets are limited.
+# That is fine for HTTPS targets (you only need outbound internet).
+services:
+  puca:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.kali
+    image: puca-kali:latest
+    working_dir: /work
+    volumes:
+      - ..:/work          # the repo, so scripts + scope.yaml + reports/ persist
+    stdin_open: true
+    tty: true
+    # No published ports, no privileged mode. Outbound only.

@@ -1,0 +1,15 @@
+# Puca — Kali web/API/agentic pentest toolbox.
+# Portable, disposable. For HTTP-layer testing of authorized targets only.
+FROM kalilinux/kali-rolling
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      kali-linux-headless \
+      nmap ffuf feroxbuster nikto sqlmap wfuzz seclists \
+      python3 python3-venv python3-pip pipx \
+      curl jq git testssl.sh ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /work
+# The harness is bind-mounted at /work by compose; install it editable at runtime
+# with:  pip install --break-system-packages -e /work
+CMD ["/bin/bash"]

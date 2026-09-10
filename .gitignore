@@ -1,0 +1,16 @@
+# Never commit real engagement data or findings to a public repo
+scope.yaml
+scope.*.yaml
+!scope.example.yaml
+reports/
+*.report.md
+out/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+.coverage

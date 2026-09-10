@@ -1,0 +1,27 @@
+# Puca engagement scope + authorization.
+# Copy to scope.yaml (gitignored) and fill in. Puca refuses every live/dynamic
+# test unless a scope file authorizes the exact target. Building != firing.
+engagement: "example.com staging assessment"
+authorized_by: "Kevin Murphy <kevin@round-tower.ie>"   # who signed off
+authorization: true                                     # must be explicitly true
+window:
+  start: "2026-09-10"
+  end:   "2026-09-30"                                    # tests refuse after this
+rate_limit_rps: 5                                        # be gentle; never DoS
+
+in_scope:
+  - host: "staging.example.com"
+    base_url: "https://staging.example.com"
+    notes: "Own staging environment. Separate DB from prod. Unscrubbed test data."
+    webhooks:
+      # direction: inbound (a provider POSTs to us) | outbound (we POST to a user URL)
+      - path: "/api/webhooks/revenuecat/"
+        direction: inbound
+        signature_scheme: "hmac_sha256_header"   # see puca.webhook.signing.SCHEMES
+        signature_header: "X-RevenueCat-Signature"
+
+out_of_scope:
+  - "production (example.com and any *.example.com that is not staging.*)"
+  - "any denial-of-service, load, or stress testing (Azure/GCP RoE prohibits it)"
+  - "any host, tenant, or account not owned by the engagement owner"
+  - "Microsoft/Google shared cloud infrastructure"
