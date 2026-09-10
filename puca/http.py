@@ -4,11 +4,14 @@ You cannot get a Sender without a Scope, and every send re-checks the target
 against it. Rate-limited to the scope's rate_limit_rps.
 
 Signed: Kev + claude-opus-4-8, 2026-09-10, Confidence 0.75, Prior: Unknown
+Review: Kev + claude-opus-4-8, 2026-09-10 — Response now carries response
+  headers (needed for the deep-run header/cookie/TLS analysis). Sender behaviour
+  unchanged; still fail-closed + rate-limited. Confidence now 0.8.
 """
 from __future__ import annotations
 
 import time as _time
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from .scope import Scope
 
@@ -18,6 +21,7 @@ class Response:
     status: int
     body: str
     elapsed: float
+    headers: dict[str, str] = field(default_factory=dict)
 
 
 class Sender:
@@ -39,8 +43,8 @@ class Sender:
         self._throttle()
         import requests  # local import so pure-logic tests need no requests
 
-        t0 = _time.monotonic()
         r = requests.request(method, url, headers=headers or {}, data=body,
                              timeout=timeout, allow_redirects=False)
         return Response(status=r.status_code, body=r.text,
-                        elapsed=_time.monotonic() - t0)
+                        elapsed=r.elapsed.total_seconds(),
+                        headers={k: v for k, v in r.headers.items()})
