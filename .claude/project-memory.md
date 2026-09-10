@@ -59,6 +59,14 @@ Edit freely — the skill only appends new session blocks.
   leading-space mismatch failed silently as "review added: False"). Not SIG_SKIP.
 - Editable install needs `[tool.setuptools.packages.find] include=["puca*"]` or
   setuptools trips on the `docker/` top-level dir.
+- **README ASCII art centering**: GitHub won't center a ``` code fence (even in
+  `<div align="center">`) — use `<pre>` with every line padded to equal display
+  width. But the pre-commit trailing-whitespace cleaner strips space padding, and
+  NBSP too (Python counts U+00A0 as whitespace). Pad the right edge with **U+2800
+  (braille blank)** — renders as an empty cell, `isspace()` is false, survives the
+  hook. The hero art is a Rubin-reduced flat 16×15 púca (horns + two asymmetric
+  negative-space eyes + frayed shadow tail); verify any change in a live GitHub
+  preview, not just source (line-height only shows there).
 
 **Next up:**
 - Draft the TutorViewSet fix (#844) on a branch in example-ai (object-level
