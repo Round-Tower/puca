@@ -53,6 +53,9 @@ docker compose -f docker/compose.yaml run --rm puca
 | `puca.timing`     | Non-constant-time signature compare      | A02 (Crypto failures)    |
 | `puca.mcp`        | Tool enumeration, prompt-injection in    | LLM01, ASI02, ASI06,     |
 |                   | tool descriptions, excessive agency      | ASI09                    |
+| `puca.access`    | Cross-account (IDOR) read detection      | A01 (Broken Access)      |
+| `puca.sca`        | Dependency vuln audit (pip/npm)          | A06 (Vuln Components)    |
+| `puca.llm`        | Prompt injection / secret leak / DoS     | LLM01, LLM02, LLM06      |
 | `puca.report`     | OWASP-mapped Markdown findings report    | —                        |
 
 ## Status
