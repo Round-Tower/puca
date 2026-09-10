@@ -77,3 +77,50 @@ Edit freely — the skill only appends new session blocks.
   suite for M1K3 (#5).
 
 ---
+## Session — 2026-09-10 · MCP arm goes live (first real target: M1K3 itself)
+
+**Shipped:**
+- `puca/mcp/probe.py` `run(sender, url)` — enumerates `tools/list` **through**
+  the scope-gated `Sender` (no route around `http.py`), flags
+  `unauthenticated-enumeration`. Plus `McpScanResult`. `puca mcp <target>` CLI.
+- Reworked `scan_tool_descriptions`: substring markers → **word-boundary
+  capability taxonomy** (`CAPABILITIES` + `_has_word`). Kills the
+  `"retrieval"`→`eval` false positive; adds `microphone-capture` + **ASI06
+  persistent-memory-write** detection. 72 tests green, ruff clean. Commit `0406b85`, pushed.
+- Local ticket `reports/TICKET-m1k3-mcp-2026-09-10.md` (gitignored). Assessment
+  filed as **Round-Tower/M1K3#274**, cross-linked to remediation **#270**.
+
+**Decisions:**
+- **New engagement = new scope, don't co-mingle.** Preserved the dyslexia scope
+  as `scope.dyslexia.yaml` (also gitignored via `scope.*.yaml`) and wrote a fresh
+  single-host `scope.yaml` for `127.0.0.1`, so no dyslexia test can fire while on
+  M1K3 work. Verified the gate refuses staging/prod/non-loopback.
+- **Didn't duplicate #270.** It already existed and named listen/forget_memory/
+  open_link. Filed #274 as the *assessment record* that backs it with evidence +
+  the ASI06 `remember` angle #270's title omits.
+- **Committed direct to master (repo pattern), pushed only when Kev said so.**
+
+**Blockers / gotchas:**
+- **M1K3's transport is well-defended — check before crying wolf.** Bound
+  `127.0.0.1` only; `Host: evil` → `421`; valid-Host + foreign `Origin` → `403`;
+  `OPTIONS` → `405` (no CORS). Remote + browser vectors are CLOSED. Residual is
+  **local non-browser** callers (omit `Origin` → served all 18 tools). Severity
+  Medium (local), not Critical. The first scan's severity would've been wrong
+  without these read-only checks.
+- **Naive substring scanning lies.** `"retrieval"` matched `eval`; local doc
+  `fetch` looked like egress; the **mic and memory-write were missed entirely**.
+  Word boundaries + a capability taxonomy are the fix. (Minor residual: a tool
+  whose *description* says "counterpart to remember" double-tags — acceptable,
+  deletion is a memory mutation.)
+- **My own `run()` block-edit swallowed neighbouring defs.** A Python
+  `str.replace` from an early anchor to end-of-function deleted
+  `tools_list_request`/`parse_tools`/`ToolFinding` that sat between. Re-inserted.
+  Lesson: bound block replacements tightly.
+
+**Next up:**
+- If Kev wants: promote the report through `puca.report.html`/`owasp.py` (the arm
+  currently prints; the render engine exists and would give a signed HTML report).
+- ROADMAP: full agentic ASI01–10 suite for M1K3 (#5) — this session did ASI02/03/
+  05/06/07/08; the rest (tool-chaining, excessive autonomy, HITL bypass) are open.
+
+---
