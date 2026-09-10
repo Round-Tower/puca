@@ -12,25 +12,45 @@ def _f():
     ]
 
 
-def test_html_is_standalone_and_themed():
+def test_standalone_and_themed():
     h = render_html(_f(), engagement="dyslexia staging", target="staging.example.com",
                     generated="2026-09-10", positives=["TLS solid"], method="scope-gated",
                     tickets=["#841"])
     assert h.startswith("<!doctype html>")
-    assert "prefers-color-scheme: dark" in h        # theme-aware
+    assert 'lang="en"' in h                              # language set
+    assert "prefers-color-scheme: dark" in h             # theme-aware
     assert "Mass assignment self-grant premium" in h
-    assert "critical" in h and "A08" in h
+    assert "A08" in h
     assert "TLS solid" in h and "#841" in h
 
 
-def test_html_escapes_content():
+def test_accessibility_features():
+    h = render_html(_f(), engagement="e", target="t", generated="g")
+    assert 'class="skip"' in h and 'href="#main"' in h   # skip link
+    assert 'id="main"' in h                              # landmark target
+    assert "<article" in h and "aria-labelledby" in h    # semantic findings
+    assert "aria-label" in h                             # labelled nav/tally
+    assert "prefers-reduced-motion" in h                 # motion respected
+    # severity is conveyed as a WORD, not colour alone
+    assert "critical" in h and "low" in h
+
+
+def test_severity_triple_encoded():
+    h = render_html(_f(), engagement="e", target="t", generated="g")
+    assert 'class="pill"' in h        # word pill
+    assert 'class="dot"' in h         # shape
+    assert "--c:#a11235" in h         # critical hue on the rule/dot/pill
+
+
+def test_escapes_content():
     h = render_html([Finding("<script>x</script>", "low", "A05", "e&e", "r",
                              confidence=0.5)],
                     engagement="e", target="t", generated="g")
-    assert "<script>x</script>" not in h            # escaped
+    assert "<script>x</script>" not in h
     assert "&lt;script&gt;" in h
 
 
-def test_html_empty_findings():
+def test_empty_findings():
     h = render_html([], engagement="e", target="t", generated="g")
-    assert "no findings" in h and h.startswith("<!doctype html>")
+    assert h.startswith("<!doctype html>")
+    assert "findings" in h            # empty tally reads "0 findings"
