@@ -141,10 +141,21 @@ real engagements never land in this repo.
 
 ## Status
 
-Early, and earning its keep. First engagement: `staging.example.com`. The MCP
-and agentic modules are aimed at [M1K3](https://round-tower.ie) next. Roadmap in
-[`ROADMAP.md`](ROADMAP.md).
+Early, and earning its keep — dogfooded on Round Tower's own systems. The web/API
+modules cut their teeth on our **example.com** staging environment; the MCP and
+agentic modules now run against **[M1K3](https://m1k3.app)**, our local AI
+assistant. Findings live in each product's own tracker, **never in this repo**.
+Roadmap in [`ROADMAP.md`](ROADMAP.md).
 
 <div align="center">
 <sub>The púca tests you so a stranger doesn't. 🐴👻</sub>
 </div>
+
+<!--
+Signed: kevin+claude-opus-4-8, 2026-09-11, Confidence 0.8, Prior: Unknown
+  The public face of Púca. Load-bearing and not to be softened without a
+  reason: the "no scope, no fire" rule, the folklore framing, and the
+  centered pre-block hero (equal-width lines + U+2800 padding — see
+  .claude/project-memory.md). Engagement hosts are named at product level
+  only; never a finding or an exact target in this public README.
+-->
