@@ -89,6 +89,33 @@ pytest                               # 63 green
 docker compose -f docker/compose.yaml run --rm puca
 ```
 
+## Calling card — set it up with your coding agent
+
+New here? Paste this into Claude Code, Cursor, or any coding agent. It clones
+Púca, runs the tests, and walks you through the safety gate before anything can
+fire:
+
+```text
+Set up Púca (https://github.com/Round-Tower/puca) in my current directory.
+
+1. Clone it. Read AGENTS.md and README.md first — the top rule is "no scope,
+   no fire": Púca only ever runs against a target I explicitly authorize in
+   scope.yaml, and the gate fails closed.
+2. Create a Python venv, run:  pip install -e '.[dev]'  then run:  pytest
+   Confirm every test passes before continuing.
+3. Copy scope.example.yaml to scope.yaml. Ask me for the target host and the
+   authorization window, then fill it in. Do NOT invent a target, and do not
+   proceed unless I confirm I am authorized to test it — staging, never
+   production.
+4. Never commit scope.yaml, reports, or secrets (the .gitignore blocks them);
+   never route a request around puca/http.py.
+5. Summarise what Púca can test, then wait for me to name an authorized target
+   before running anything.
+```
+
+Using Claude Code? The bundled `puca` skill drives the whole scan-and-report
+flow once your scope is authored.
+
 ## What Púca tests
 
 | Module         | Attack                                             | OWASP mapping             |
