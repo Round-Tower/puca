@@ -13,7 +13,7 @@ def _f():
 
 
 def test_standalone_and_themed():
-    h = render_html(_f(), engagement="dyslexia staging", target="staging.example.com",
+    h = render_html(_f(), engagement="example staging", target="staging.example.com",
                     generated="2026-09-10", positives=["TLS solid"], method="scope-gated",
                     tickets=["#841"])
     assert h.startswith("<!doctype html>")

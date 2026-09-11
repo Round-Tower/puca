@@ -142,7 +142,7 @@ real engagements never land in this repo.
 ## Status
 
 Early, and earning its keep — dogfooded on Round Tower's own systems. The web/API
-modules cut their teeth on our **example.com** staging environment; the MCP and
+modules cut their teeth on one of our own edtech apps in staging; the MCP and
 agentic modules now run against **[M1K3](https://m1k3.app)**, our local AI
 assistant. Findings live in each product's own tracker, **never in this repo**.
 Roadmap in [`ROADMAP.md`](ROADMAP.md).
@@ -158,4 +158,7 @@ Signed: kevin+claude-opus-4-8, 2026-09-11, Confidence 0.8, Prior: Unknown
   centered pre-block hero (equal-width lines + U+2800 padding — see
   .claude/project-memory.md). Engagement hosts are named at product level
   only; never a finding or an exact target in this public README.
+  Review: 2026-09-11 (claude-opus-4-8) — redacted the named app host from the Status
+  section to "one of our own edtech apps in staging", per the rule above
+  (engagement hosts named at product level only). No other change.
 -->

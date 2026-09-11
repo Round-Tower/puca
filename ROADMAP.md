@@ -20,7 +20,7 @@ The "battery" is Púca's set of test modules. Priority order set by Kev
 
 | # | Module | What it does | OWASP |
 |---|--------|--------------|-------|
-| 2 | `puca.massassign` | **Mass-assignment prober** — attempt privileged fields on every writable serializer + diff. Would have auto-caught the example-ai #841 critical. | A08 |
+| 2 | `puca.massassign` | **Mass-assignment prober** — attempt privileged fields on every writable serializer + diff. Would have auto-caught a real self-grant-premium critical found in staging. | A08 |
 | 5 | `puca.mcp` (agentic suite) | **Full ASI01–10 battery for M1K3** — tool poisoning, memory poisoning, excessive agency, rogue-agent. Separate scoped engagement (127.0.0.1). | ASI01–10 |
 
 ## Live-run prerequisites

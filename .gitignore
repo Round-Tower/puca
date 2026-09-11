@@ -3,6 +3,8 @@ scope.yaml
 scope.*.yaml
 !scope.example.yaml
 reports/
+.claude/project-memory.private.md
+*.private.md
 *.report.md
 *.report.html
 out/

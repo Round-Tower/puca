@@ -29,7 +29,7 @@ def test_render_markdown_includes_title_and_findings():
     fs = [owasp.Finding("Unsigned webhook accepted", "critical", "A08",
                         "POST with no signature returned 200", "Verify HMAC",
                         confidence=0.9, target="https://staging.example.com/w")]
-    md = owasp.render_markdown(fs, engagement="dyslexia staging",
+    md = owasp.render_markdown(fs, engagement="example staging",
                                target="staging.example.com", generated="2026-09-10")
     assert "# Puca report" in md
     assert "Unsigned webhook accepted" in md
