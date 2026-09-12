@@ -4,7 +4,7 @@ Signed: Kev + claude-opus-4-8, 2026-09-10, Confidence 0.8, Prior: Unknown
 """
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 WEB_TOP_10_2021 = {
     "A01": "Broken Access Control",

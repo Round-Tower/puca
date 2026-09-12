@@ -1,4 +1,6 @@
-import hashlib, hmac
+import hashlib
+import hmac
+
 import pytest
 from puca.webhook import signing
 

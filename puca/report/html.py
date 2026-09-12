@@ -24,7 +24,7 @@ from __future__ import annotations
 import html as _h
 from string import Template
 
-from .owasp import Finding, owasp_name, sort_findings, SEVERITIES
+from .owasp import owasp_name, sort_findings, SEVERITIES
 
 # Severity hue — used for dot + left rule + pill (always paired with the word).
 _SEV = {"critical": "#a11235", "high": "#b4530a", "medium": "#8a6d1f",

@@ -59,7 +59,7 @@ See <https://murphysig.dev/spec>.
 ```bash
 python3 -m venv .venv && . .venv/bin/activate
 pip install -e '.[dev]'
-pytest                 # must stay green (63+)
+pytest                 # must stay green (97+)
 ruff check . && mypy puca
 ```
 

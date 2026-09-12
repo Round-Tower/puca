@@ -16,7 +16,13 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8.0"]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.8",
+    "mypy>=1.10",
+    "types-PyYAML",
+    "types-requests",
+]
 
 [project.scripts]
 puca = "puca.cli:main"
@@ -26,3 +32,19 @@ include = ["puca*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+# requests + yaml have types-* in dev; strict enough to catch real drift
+# without flagging every untyped def in the test harness.

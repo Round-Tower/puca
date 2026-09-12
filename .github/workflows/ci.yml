@@ -1,0 +1,25 @@
+name: ci
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install (editable + dev)
+        run: pip install -e '.[dev]'
+      - name: Tests
+        run: pytest -q
+      - name: Lint (ruff)
+        run: ruff check .
+      - name: Types (mypy — advisory)
+        # advisory until the codebase is fully strict; fails don't block merge
+        continue-on-error: true
+        run: mypy puca

@@ -22,7 +22,7 @@
 **A white-hat security kit that meets your systems on the road and tests them.**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-black.svg)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-63%20passing-brightgreen.svg)](tests/)
+[![Tests](https://img.shields.io/badge/tests-97%20passing-brightgreen.svg)](tests/)
 [![OWASP](https://img.shields.io/badge/OWASP-Web%20%2B%20LLM%20%2B%20Agentic-5b2a86.svg)](#what-púca-tests)
 [![Scope](https://img.shields.io/badge/no%20scope-no%20fire-red.svg)](#the-one-rule)
 
@@ -83,7 +83,7 @@ cp scope.example.yaml scope.yaml && $EDITOR scope.yaml
 # 2. Local harness — no Kali needed for webhook / MCP / report work
 python3 -m venv .venv && . .venv/bin/activate
 pip install -e '.[dev]'
-pytest                               # 63 green
+pytest                               # 97 green
 
 # 3. Full Kali toolbox when you want the network / fuzzing arsenal
 docker compose -f docker/compose.yaml run --rm puca
@@ -126,6 +126,7 @@ flow once your scope is authored.
 | `puca.access`  | Cross-account (IDOR / BOLA) detection              | A01 (Broken access)       |
 | `puca.mcp`     | Tool enumeration, prompt-injection in tool         | LLM01 · ASI02 / ASI06 /   |
 |                | descriptions, excessive agency                     | ASI09                     |
+| `puca.massassign` | Privileged-field mass-assignment (non-escalating sentinel) | A08                |
 | `puca.sca`     | Dependency vulnerability audit (pip / npm)         | A06 (Vuln components)     |
 | `puca.llm`     | Prompt injection · secret leak · unbounded use     | LLM01 · LLM02 · LLM06     |
 | `puca.report`  | OWASP-mapped, accessible findings report           | —                         |
