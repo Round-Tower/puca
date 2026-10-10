@@ -1,21 +1,5 @@
 <div align="center">
-<pre>
-  ██        ██⠀⠀
-  ██        ██⠀⠀
- ▄████████████▄⠀
-████████████████
-████████████████
-███   ████  ████
-███   ████  ████
-███   ████  ████
-████████████████
-████████████████
-████████████████
-████████████████
-███ ██ ██ ██ ███
-█▀  ▀█ ▀█ █▀  ▀█
- ▘   ▘  ▘   ▘  ▘
-</pre>
+<img src="assets/hero.svg" alt="Púca — a white-hat security kit that meets your systems on the road and tests them. A pixel púca shapeshifts on a night road while its probes light the in-scope targets and stop at the scope boundary: no scope, no fire." width="100%">
 
 # Púca
 
@@ -162,4 +146,9 @@ Signed: kevin+claude-opus-4-8, 2026-09-11, Confidence 0.8, Prior: Unknown
   Review: 2026-09-11 (claude-opus-4-8) — redacted the named app host from the Status
   section to "one of our own edtech apps in staging", per the rule above
   (engagement hosts named at product level only). No other change.
+  Review: Kev + claude-opus-5-5, 2026-10-07 — the centred pre-block hero becomes the
+  animated assets/hero.svg (Kev asked for a GitHub hero), so the "load-bearing" pre is
+  replaced, not softened: its art moved verbatim to assets/puca-mark.txt, which
+  scripts/readme_hero.py reads cell by cell, so the same púca stands in the banner (and
+  shapeshifts). The rule, the folklore framing and the title stay. Confidence now 0.8.
 -->
